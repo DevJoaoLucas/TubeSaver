@@ -32,7 +32,7 @@ namespace TubeSaver
 
             string tempVideoPath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}_video.mp4");
             string tempAudioPath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}_audio.mp4");
-            string tempOutputPath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}_final.mp4");
+            string tempOutputPath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}_final.wmv");
 
             try
             {
@@ -95,7 +95,11 @@ namespace TubeSaver
                 throw new FileNotFoundException("FFmpeg não encontrado no caminho especificado.");
             }
 
-            string arguments = $"-i \"{videoPath}\" -i \"{audioPath}\" -c:v copy -c:a aac -strict experimental -shortest \"{outputPath}\"";
+           
+            outputPath = Path.ChangeExtension(outputPath, ".wmv");
+
+           
+            string arguments = $"-i \"{videoPath}\" -i \"{audioPath}\" -c:v wmv2 -c:a wmav2 -shortest \"{outputPath}\"";
 
             var process = new Process()
             {
@@ -120,10 +124,7 @@ namespace TubeSaver
             try
             {
                 process.Start();
-
                 process.BeginErrorReadLine();
-
-
                 process.WaitForExit();
 
                 if (process.ExitCode != 0)

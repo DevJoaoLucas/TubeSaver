@@ -45,7 +45,7 @@ namespace TubeSaver
                 {
                     var youtubeService = new YouTubeService(labelStatusUsuario);
 
-                    // Use o dicionário para obter o stream selecionado
+                    
                     if (qualityToStreamMap.TryGetValue(comboBoxOpcoesQualidade.SelectedItem.ToString(), out var selectedStream))
                     {
                         await Task.Run(async () =>
@@ -127,11 +127,11 @@ namespace TubeSaver
             var videoStreams = streamManifest.GetVideoOnlyStreams()
                                               .Where(stream => stream.Container.Name.Equals("mp4", StringComparison.OrdinalIgnoreCase));
 
-            qualityToStreamMap = new Dictionary<string, IStreamInfo>(); // Inicialize o dicionário
+            qualityToStreamMap = new Dictionary<string, IStreamInfo>();
 
             foreach (var stream in videoStreams)
             {
-                qualityToStreamMap[stream.VideoQuality.Label] = stream; // Preencha o dicionário
+                qualityToStreamMap[stream.VideoQuality.Label] = stream; 
             }
 
             comboBoxOpcoesQualidade.Items.Clear();
