@@ -98,8 +98,9 @@ namespace TubeSaver
            
             outputPath = Path.ChangeExtension(outputPath, ".wmv");
 
-           
-            string arguments = $"-i \"{videoPath}\" -i \"{audioPath}\" -c:v wmv2 -c:a wmav2 -shortest \"{outputPath}\"";
+
+            //string arguments = $"-i \"{videoPath}\" -i \"{audioPath}\" -c:v wmv2 -c:a wmav2 -shortest \"{outputPath}\"";
+            string arguments = $"-i \"{videoPath}\" -i \"{audioPath}\" -c:v wmv2 -b:v 3000k -c:a wmav2 -b:a 192k -shortest \"{outputPath}\"";
 
             var process = new Process()
             {
